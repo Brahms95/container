@@ -25,6 +25,10 @@ struct list {
         return first == nullptr;
     }
 
+    int size_(){
+        return size_list;
+    }
+
     public:
     class iterator
     {
@@ -61,15 +65,18 @@ public:
         size_list++;
     }
  
-    void print() {
-        if (first == nullptr) return;
+     std::string print() {
+        if (first == nullptr) return "";
         Node<T>* p = first;
+        std::string vector;
         while (p) {
-           cout << p->val << " " ;
+          // cout << p->val << " " ;
+           vector.append(std::to_string(p->val));
          // cout << p->val << " " << "(" << p->next << ")" << " " ;
             p = p->next;
         }
-        cout << endl;
+       // cout << endl;
+       return vector;
     }
  
     int size_print(){
@@ -80,6 +87,7 @@ public:
         if (first == nullptr) return;
         Node<T>* p = first;
         first = p->next;
+        size_list--;
         delete p;
     }
  
@@ -111,7 +119,10 @@ public:
         while (p->next != last) p = p->next;
         p->next = nullptr;
         delete last;
+       
         last = p;
+          std ::cout << "1111" << std::endl;
+        size_list= size_list-1;
     }
  
     void push_frond(T _val){
@@ -157,6 +168,7 @@ public:
  
     Node<T>* operator[] (const int index) {
         if (first == nullptr) return nullptr;
+         std ::cout << "dasdada1" << std::endl;
         Node<T>* p = first;
         for (int i = 0; i < index; i++) {
             p = p->next;

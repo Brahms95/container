@@ -33,7 +33,7 @@ public:
             index++;
             new_region[index] = m_region[i]; // копирование элементов 
     } 
-    
+     
         delete [] m_region; // удаление старой области 
         m_region = new_region; // сохранение новой в мембер 
         m_size += 1; // обновление информации о размере 
@@ -56,15 +56,18 @@ public:
         m_size += 1; // обновление информации о размере 
     }
 
-    vectorClass& operator= (T* new_region){}
-
+    vectorClass& operator= (T* new_region)const {
+        
+    }
+    T operator[] (T index) { return m_region[index]; }
+     
     int size(){ return m_size; }
  
-    void erase(int a, int b, int c){
-        T* new_region = new T[m_size - a];
+    void erase(int a){
+        T* new_region = new T[m_size - 1];
         int index= 0;
         for (int i = 0; i<=m_size; i++) {
-            if (i == a-1 || i == b-1 || i == c-1)
+            if (i == a-1 )
                 continue;
             
             new_region[index] = m_region[i]; 
@@ -73,14 +76,44 @@ public:
               
         delete [] m_region; // удаление старой области 
         m_region = new_region; // сохранение новой в мембер 
-        m_size -= 3; // обновление информации о размере 
+        m_size -= 1; // обновление информации о размере 
+    }
+    void pop_begin (){
+       T* new_region = new T[m_size - 1];
+        int j =0;
+        for (int i = 1; i<=m_size; i++, j++) {
+            new_region[j] = m_region[i]; 
+            }
+              
+        delete [] m_region; // удаление старой области 
+        m_region = new_region; // сохранение новой в мембер 
+        m_size -= 1; // обновление информации о размере  
     }
 
-    void print(){
+    void pop_back(){
+          T* new_region = new T[m_size - 1];
+
+        for (int i = 0; i<m_size; i++) {
+            new_region[i] = m_region[i]; 
+            }
+              
+        delete [] m_region; // удаление старой области 
+        m_region = new_region; // сохранение новой в мембер 
+        m_size -= 1; // обновление информации о размере  
+    }
+    std::string print(){
+        std::string vector;
         for (T i = 0; i < m_size; i++) {
-            cout << m_region[i]<< " ";
+            vector.append(std::to_string(m_region[i]));
+          //  cout << m_region[i]<< " ";
         }
-        cout << endl;
+        
+       // cout << endl;
+        return vector;
+    }
+
+    int size_(){
+        return m_size;
     }
 
 private:
