@@ -112,6 +112,7 @@ public:
         p->next = nullptr;
         delete last;
         last = p;
+         size_list--;
     }
  
     void push_frond(T _val){

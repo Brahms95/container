@@ -61,7 +61,7 @@ public:
     int size(){ return m_size; }
  
     void erase(int a, int b, int c){
-        T* new_region = new T[m_size - a];
+        T* new_region = new T[m_size - 3];
         int index= 0;
         for (int i = 0; i<=m_size; i++) {
             if (i == a-1 || i == b-1 || i == c-1)
